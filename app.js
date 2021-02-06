@@ -4,7 +4,7 @@ let exmplArgs = [0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
 google.charts.setOnLoadCallback(drawPie);
-function drawPie(args=[0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58, 0.13, 0.36, 0.13, 0.36, 0.13, 0.1, 0, 0, 0, 0]) {
+function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
 
   // Create the data table for Sarah's pizza.
   var data = new google.visualization.DataTable();
@@ -42,7 +42,7 @@ function drawPie(args=[0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4
   chart.draw(data, options);
 }
 
-function drawBasic(args=[0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58, 0.13, 0.36, 0.13, 0.36, 0.13, 0.1, 0, 0, 0, 0]) {
+function drawBasic(args=[0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
       var data = google.visualization.arrayToDataTable([
         ['VHI', '%', { role: 'style' }],
         ['0', args[0], '#f8961e'],
