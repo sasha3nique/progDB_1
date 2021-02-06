@@ -14,7 +14,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: #43aa8b;
 }
 
 select {
@@ -31,6 +30,7 @@ button {
 }
 
 #header {
+  background-color: rgba(144, 190, 109, 0.25);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,7 +48,7 @@ button {
 #createGraph {
   background-color: #90be6d;
   color: black;
-  border: 1px solid white;
+  border: none;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
@@ -67,10 +67,12 @@ button {
 
 #chart {
   width: 70%;
+  max-width: 70%;
   padding: 1;
 }
 
 #info {
+  min-width: 30%;
   width: 30%;
   padding-top: 40px;
 }

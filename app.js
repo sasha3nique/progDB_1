@@ -3,6 +3,45 @@ let exmplArgs = [0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
+google.charts.setOnLoadCallback(drawPie);
+function drawPie(args=[0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58, 0.13, 0.36, 0.13, 0.36, 0.13, 0.1, 0, 0, 0, 0]) {
+
+  // Create the data table for Sarah's pizza.
+  var data = new google.visualization.DataTable();
+
+  var ind1 = 0;
+  for (let i = 0; i < 4; i++) {
+    ind1 += args[i];
+  }
+  var ind2 = 0;
+  for (let i = 4; i < 8; i++) {
+    ind2 += args[i];
+  }
+  var ind3 = 0;
+  for (let i = 8; i < 13; i++) {
+    ind3 += args[i];
+  }
+  var ind4 = 0;
+  for (let i = 13; i < args.length; i++) {
+    ind4 += args[i];
+  }
+
+  var data = google.visualization.arrayToDataTable([
+    ['херовость', '%'],
+    ['1', ind1],
+    ['2', ind2],
+    ['3', ind3],
+    ['4', ind4]]);
+
+  // Set options for Sarah's pie chart.
+  var options = {
+  'chartArea': {'width': '90%', 'height': '90%'}, legend: 'none', title: '', colors: ['#f8961e','#f9c74f','#90be6d','#43aa8b']};
+
+  // Instantiate and draw the chart for Sarah's pizza.
+  var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+  chart.draw(data, options);
+}
+
 function drawBasic(args=[0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58, 0.13, 0.36, 0.13, 0.36, 0.13, 0.1, 0, 0, 0, 0]) {
       var data = google.visualization.arrayToDataTable([
         ['VHI', '%', { role: 'style' }],
@@ -37,11 +76,12 @@ function drawBasic(args=[0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2
           title: '% від загальної площі області'
         },
         height: 600,
+        width: 1000,
         'chartArea': {'width': '80%', 'height': '80%'},
         allowCollapse: true,
         legend: 'none',
         animation:{
-          duration: 1000,
+          duration: 0,
           easing: 'out'
         },
         startup: true,
@@ -86,7 +126,7 @@ function handleJson(js) {
 
   console.log(arr);
   drawBasic(arr);
-
+  drawPie(arr);
 }
 
 }

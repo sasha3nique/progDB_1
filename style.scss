@@ -7,7 +7,6 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: #43aa8b;
 }
 
 select {
@@ -24,6 +23,7 @@ button {
 }
 
 #header {
+    background-color: rgba(144, 190, 109, 0.25);
     display: flex;
     align-content: center;
     justify-content: center;
@@ -35,7 +35,7 @@ button {
 #createGraph {
     background-color: #90be6d;
     color: black;
-    border: 1px solid white;
+    border: none;
     transition: all 0.1s ease-in-out;
     &:hover {
         background-color: #43aa8b;
@@ -50,9 +50,11 @@ button {
 
 #chart {
     width: 70%;
+    max-width: 70%;
     padding: 1;
 }
 #info {
+    min-width: 30%;
     width: 30%;
     padding-top: 40px;
 }
