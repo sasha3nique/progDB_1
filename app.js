@@ -1,12 +1,12 @@
-
+function render(mainColor, textColor) {
 let exmplArgs = [0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58, 0.13, 0.36, 0.13, 0.36, 0.13, 0.1, 0, 0, 0, 0]
+let darkgrey = mainColor;
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
 google.charts.setOnLoadCallback(drawPie);
 function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
 
-  // Create the data table for Sarah's pizza.
   var data = new google.visualization.DataTable();
 
   var ind1 = 0;
@@ -27,15 +27,29 @@ function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   }
 
   var data = google.visualization.arrayToDataTable([
-    ['херовость', '%'],
-    ['1', ind1],
-    ['2', ind2],
-    ['3', ind3],
-    ['4', ind4]]);
+    ['VHI', '%'],
+    ['Велика засуха', ind1],
+    ['Середня засуха', ind2],
+    ['Нормальний', ind3],
+    ['Хороший', ind4]]);
 
   // Set options for Sarah's pie chart.
   var options = {
-  'chartArea': {'width': '90%', 'height': '90%'}, legend: 'none', title: '', colors: ['#f8961e','#f9c74f','#90be6d','#43aa8b']};
+  'chartArea': {'width': '90%', 'height': '90%', 'backgroundColor': {
+    'fill': darkgrey,
+    'opacity': 100
+  }},
+  legend: 'none', title: '', colors: ['#f8961e','#f9c74f','#90be6d','#43aa8b', ],
+  'backgroundColor': {
+    'fill': darkgrey,
+    'opacity': 100
+  },
+  animation: {
+    duration: 300,
+    easing: 'ease',
+    startup: true
+}
+};
 
   // Instantiate and draw the chart for Sarah's pizza.
   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
@@ -70,21 +84,32 @@ function drawBasic(args=[0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
       var options = {
         title: '',
         hAxis: {
-          title: 'VHI'
+          title: 'VHI',
+          textStyle:{color: textColor}
         },
         vAxis: {
-          title: '% від загальної площі області'
+          title: '% від загальної площі області',
+          textStyle:{color: textColor}
         },
         height: 600,
         width: 1000,
-        'chartArea': {'width': '80%', 'height': '80%'},
+        'chartArea': {'width': '80%', 'height': '80%', 
+        'backgroundColor': {
+          'fill': darkgrey,
+          'opacity': 100
+        }},
         allowCollapse: true,
         legend: 'none',
-        animation:{
-          duration: 0,
-          easing: 'out'
-        },
-        startup: true,
+        animation: {
+          duration: 300,
+          easing: 'ease',
+          startup: true
+      },
+      'backgroundColor': {
+        'fill': darkgrey,
+        'opacity': 100
+      },
+      color: 'white'
       };
       var chart = new google.visualization.ColumnChart(
         document.getElementById('chart_div'));
@@ -130,6 +155,33 @@ function handleJson(js) {
 }
 
 }
+}
 
+render('#192734', 'FFF');
 
+function switchToDarkMode() {
+  document.getElementById('container').style.backgroundColor = '#192734';
+  document.getElementById('container').style.color = '#FFF';
+  render('#192734', 'FFF');
+  drkBtn = document.getElementById('darkModeButton');
+  drkBtn.onclick = function() {
+    switchToLightMode();
+}
+drkBtn.style.backgroundColor = '#f9c74f';
+}
 
+function switchToLightMode() {
+  document.getElementById('container').style.backgroundColor = '#FFF';
+  document.getElementById('container').style.color = '#192734';
+  render('#FFF', '#192734');
+  drkBtn = document.getElementById('darkModeButton');
+  drkBtn.onclick = function() {
+    switchToDarkMode();
+}
+drkBtn.style.backgroundColor = '#FFF';
+}
+
+drkBtn = document.getElementById('darkModeButton');
+drkBtn.onclick = function() {
+  switchToLightMode();
+}

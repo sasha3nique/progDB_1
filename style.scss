@@ -1,3 +1,6 @@
+$darkgrey: #192734;
+$white: #FFF;
+
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +10,11 @@
 body {
     display: flex;
     flex-direction: column;
+    color: #FFF;
+}
+#container {
+    background-color: $darkgrey;
+    height: 100vh;
 }
 
 select {
@@ -82,4 +90,27 @@ h3 {
 }
 #lgb4 {
     background-color: #43aa8b;
+}
+
+#darkModeButton {
+    position: fixed;
+    top:0;
+    right:0;
+    padding: 0;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    img {
+        width: 80%;
+        height: 80%;
+        padding: 0;
+        margin: 0;
+        transition: transform 0.25s ease;
+        &:hover {
+            transform: rotate(25deg);
+        }
+    }
+    background: #f9c74f;
 }
