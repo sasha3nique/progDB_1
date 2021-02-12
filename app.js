@@ -1,6 +1,6 @@
 function render(mainColor, textColor) {
-let exmplArgs = [0, 0.67, 3.63, 9.55, 15.68,  11.95, 9.42, 6.26, 4.66, 2.4, 0.58, 0.13, 0.36, 0.13, 0.36, 0.13, 0.1, 0, 0, 0, 0]
 let darkgrey = mainColor;
+let secondColor = textColor;
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
@@ -85,11 +85,11 @@ function drawBasic(args=[0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
         title: '',
         hAxis: {
           title: 'VHI',
-          textStyle:{color: textColor}
+          textStyle:{color: secondColor}
         },
         vAxis: {
           title: '% від загальної площі області',
-          textStyle:{color: textColor}
+          textStyle:{color: secondColor}
         },
         height: 600,
         width: 1000,
@@ -157,12 +157,12 @@ function handleJson(js) {
 }
 }
 
-render('#192734', 'FFF');
+render('#192734', '#FFF');
 
 function switchToDarkMode() {
   document.getElementById('container').style.backgroundColor = '#192734';
   document.getElementById('container').style.color = '#FFF';
-  render('#192734', 'FFF');
+  render('#192734', '#FFF');
   drkBtn = document.getElementById('darkModeButton');
   drkBtn.onclick = function() {
     switchToLightMode();
@@ -185,3 +185,5 @@ drkBtn = document.getElementById('darkModeButton');
 drkBtn.onclick = function() {
   switchToLightMode();
 }
+
+switchToLightMode();
