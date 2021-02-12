@@ -3,84 +3,73 @@ let darkgrey = mainColor;
 let secondColor = textColor;
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawBasic);
-google.charts.setOnLoadCallback(drawPie);
-function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
+google.charts.setOnLoadCallback(drawVisualization);
+//google.charts.setOnLoadCallback(drawBasic);
+//google.charts.setOnLoadCallback(drawPie);
+// function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
 
-  var data = new google.visualization.DataTable();
+//   var data = new google.visualization.DataTable();
 
-  var ind1 = 0;
-  for (let i = 0; i < 4; i++) {
-    ind1 += args[i];
-  }
-  var ind2 = 0;
-  for (let i = 4; i < 8; i++) {
-    ind2 += args[i];
-  }
-  var ind3 = 0;
-  for (let i = 8; i < 13; i++) {
-    ind3 += args[i];
-  }
-  var ind4 = 0;
-  for (let i = 13; i < args.length; i++) {
-    ind4 += args[i];
-  }
+//   var ind1 = 0;
+//   for (let i = 0; i < 4; i++) {
+//     ind1 += args[i];
+//   }
+//   var ind2 = 0;
+//   for (let i = 4; i < 8; i++) {
+//     ind2 += args[i];
+//   }
+//   var ind3 = 0;
+//   for (let i = 8; i < 13; i++) {
+//     ind3 += args[i];
+//   }
+//   var ind4 = 0;
+//   for (let i = 13; i < args.length; i++) {
+//     ind4 += args[i];
+//   }
 
-  var data = google.visualization.arrayToDataTable([
-    ['VHI', '%'],
-    ['Велика засуха', ind1],
-    ['Середня засуха', ind2],
-    ['Нормальний', ind3],
-    ['Хороший', ind4]]);
+//   var data = google.visualization.arrayToDataTable([
+//     ['VHI', '%'],
+//     ['Велика засуха', ind1],
+//     ['Середня засуха', ind2],
+//     ['Нормальний', ind3],
+//     ['Хороший', ind4]]);
 
-  // Set options for Sarah's pie chart.
-  var options = {
-  'chartArea': {'width': '90%', 'height': '90%', 'backgroundColor': {
-    'fill': darkgrey,
-    'opacity': 100
-  }},
-  legend: 'none', title: '', colors: ['#f8961e','#f9c74f','#90be6d','#43aa8b', ],
-  'backgroundColor': {
-    'fill': darkgrey,
-    'opacity': 100
-  },
-  animation: {
-    duration: 300,
-    easing: 'ease',
-    startup: true
-}
-};
+//   // Set options for Sarah's pie chart.
+//   var options = {
+//   'chartArea': {'width': '90%', 'height': '90%', 'backgroundColor': {
+//     'fill': darkgrey,
+//     'opacity': 100
+//   }},
+//   legend: 'none', title: '', colors: ['#f8961e','#f9c74f','#90be6d','#43aa8b', ],
+//   'backgroundColor': {
+//     'fill': darkgrey,
+//     'opacity': 100
+//   },
+//   animation: {
+//     duration: 300,
+//     easing: 'ease',
+//     startup: true
+// }
+// };
 
-  // Instantiate and draw the chart for Sarah's pizza.
-  var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-  chart.draw(data, options);
-}
+//   // Instantiate and draw the chart for Sarah's pizza.
+//   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+//   chart.draw(data, options);
+// }
 
-function drawBasic(args=[0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
-      var data = google.visualization.arrayToDataTable([
-        ['VHI', '%', { role: 'style' }],
-        ['0', args[0], '#f8961e'],
-        ['5', args[1], '#f8961e'],
-        ['10', args[2], '#f8961e'],
-        ['15', args[3], '#f8961e'],
-        ['20', args[4], '#f9c74f'],
-        ['25', args[5], '#f9c74f'],
-        ['30', args[6], '#f9c74f'],
-        ['35', args[7], '#f9c74f'],
-        ['40', args[8],'#90be6d'],
-        ['45', args[9],'#90be6d'],
-        ['50', args[10],'#90be6d'],
-        ['55', args[11],'#90be6d'],
-        ['60', args[12],'#90be6d'],
-        ['65', args[13], '#43aa8b'],
-        ['70', args[14], '#43aa8b'],
-        ['75', args[15], '#43aa8b'],
-        ['80', args[16], '#43aa8b'],
-        ['85', args[17], '#43aa8b'],
-        ['90', args[18], '#43aa8b'],
-        ['95', args[19], '#43aa8b'],
-        ['100', args[20], '#43aa8b']
-      ]);
+//* Отримуємо на вхід масив значень за тиждень
+function drawVisualization(args=[[0,0,0,0,0]]) {
+
+      let elem = [];
+      let table = [];
+      table.push(['Рік', '<20', '20-40', '40-65', '>65', 'Average']); 
+      for (let i = 0; i < args.length; i++){
+        elem = [args[i][0], args[i][1], args[i][2], args[i][3], args[i][4], (args[i][2]+args[i][3])/2];
+        table.push(elem);
+      }
+
+      var data = google.visualization.arrayToDataTable(table);
+
       var options = {
         title: '',
         hAxis: {
@@ -109,7 +98,9 @@ function drawBasic(args=[0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
         'fill': darkgrey,
         'opacity': 100
       },
-      color: 'white'
+      seriesType: 'bars',
+      series: {4: {type: 'line'}},
+      colors:['#f8961e','#f9c74f','#90be6d','#43aa8b', 'red']
       };
       var chart = new google.visualization.ColumnChart(
         document.getElementById('chart_div'));
@@ -121,14 +112,14 @@ function drawBasic(args=[0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 document.getElementById('createGraph').onclick = function() {
   let region = document.getElementById('regionSelect').value;
   let year = +(document.getElementById('yearSelect').value);
-  let week = +(document.getElementById('weekSelect').value);
+  let year2 = +(document.getElementById('year2Select').value);
   let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${region}.json`;
-  reqURL(url, region, year, week);
+  reqURL(url, year, year2);
 }
 
-function reqURL(url, region, year, week) {
+function reqURL(url, year, year2) {
 let requestURL = url;
-
+let finalArray = [];
 let request = new XMLHttpRequest();
 
 request.open('GET', requestURL);
@@ -136,25 +127,66 @@ request.responseType = 'json';
 request.send();
 request.onload = function() {
   data = request.response;
-  handleJson(data);
+  handleJson(data, year, year2);
 }
 
 let arr = [];
 
-function handleJson(js) {
-  console.log(js[`${year}`][week-1][`${week}`]);
-  let arr = js[`${year}`][week-1][`${week}`];
+
+function handleJson(js, year, year2) {
   
-  arr = arr.map(function(val, index, arr) {
-    return val*1;
-  })
 
-  console.log(arr);
-  drawBasic(arr);
-  drawPie(arr);
+if (year <= year2) {
+  for (let iter = year; iter < year2+1; iter++) {
+
+  console.log(js);
+
+  const WEEK_NUMBER = 52;
+  let arrYear = [];
+
+  for (let i = 0; i < 21; i++) {
+    let avg = 0;
+    for (let j = 0; j < WEEK_NUMBER; j++) {
+      avg+=+(js[`${iter}`][j][`${j+1}`][i]); //сума i стовпця
+    }
+    avg = Math.ceil((avg/WEEK_NUMBER)*100)/100; // до сотих
+    console.log(avg);
+    arrYear.push(avg);
+  }
+
+  console.log(arrYear);
+
+  //! 1-4, 5-8, 9-13, rest
+  let awfulVHI = Math.ceil(arrYear.slice(0, 3).reduce(function(acc, val) {
+    return acc + val;
+  })*100)/100; // сума всіх vhi одного типу
+  let badVHI = Math.ceil(arrYear.slice(4, 7).reduce(function(acc, val) {
+    return acc + val;
+  })*100)/100;
+  let goodVHI = Math.ceil(arrYear.slice(8, 12).reduce(function(acc, val) {
+    return acc + val;
+  })*100)/100;
+  let exVHI = Math.ceil(arrYear.slice(13).reduce(function(acc, val) { //ex - excellent
+    return acc + val;
+  })*100)/100;
+
+  console.log(badVHI);
+
+  let rawArray = [`${iter}`,awfulVHI, badVHI, goodVHI, exVHI]; 
+  finalArray.push(rawArray);
+
+  console.log(finalArray);
+}
+
+
+
+drawVisualization(finalArray);
+
+} else alert('Неправильно введений діапазон років!');
 }
 
 }
+
 }
 
 render('#192734', '#FFF');
