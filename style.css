@@ -88,7 +88,7 @@ rect {
 }
 
 h3 {
-  padding-bottom: 40px;
+  padding-bottom: 10px;
 }
 
 .legendBox {
@@ -115,30 +115,32 @@ h3 {
 
 #darkModeButton {
   position: fixed;
-  top: 0;
+  top: 5px;
   right: 0;
   padding: 0;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   margin: 5px;
   border-radius: 50px;
   border: none;
   background: #f9c74f;
 }
 
+#darkModeButton:hover img {
+  -webkit-transform: rotate(25deg);
+          transform: rotate(25deg);
+}
+
 #darkModeButton img {
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   padding: 0;
   margin: 0;
+  -webkit-transform: rotate(1deg);
+          transform: rotate(1deg);
   -webkit-transition: -webkit-transform 0.25s ease;
   transition: -webkit-transform 0.25s ease;
   transition: transform 0.25s ease;
   transition: transform 0.25s ease, -webkit-transform 0.25s ease;
-}
-
-#darkModeButton img:hover {
-  -webkit-transform: rotate(25deg);
-          transform: rotate(25deg);
 }
 /*# sourceMappingURL=style.css.map */

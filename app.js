@@ -4,8 +4,6 @@ let secondColor = textColor;
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawVisualization);
-//google.charts.setOnLoadCallback(drawBasic);
-//google.charts.setOnLoadCallback(drawPie);
 // function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
 
 //   var data = new google.visualization.DataTable();
@@ -59,12 +57,12 @@ google.charts.setOnLoadCallback(drawVisualization);
 
 //* Отримуємо на вхід масив значень за тиждень
 function drawVisualization(args=[[0,0,0,0,0]]) {
-
+      console.log(args);
       let elem = [];
       let table = [];
-      table.push(['Рік', '<20', '20-40', '40-65', '>65', 'Average']); 
+      table.push(['Рік', '<20', '20-40', '40-65', '>65', 'vhi %inc']); 
       for (let i = 0; i < args.length; i++){
-        elem = [args[i][0], args[i][1], args[i][2], args[i][3], args[i][4], (args[i][2]+args[i][3])/2];
+        elem = [args[i][0], args[i][1], args[i][2], args[i][3], args[i][4], (args[i][3]/2.5+args[i][4]/1.5)];
         table.push(elem);
       }
 
@@ -73,7 +71,7 @@ function drawVisualization(args=[[0,0,0,0,0]]) {
       var options = {
         title: '',
         hAxis: {
-          title: 'VHI',
+          title: 'Роки',
           textStyle:{color: secondColor}
         },
         vAxis: {
@@ -82,7 +80,7 @@ function drawVisualization(args=[[0,0,0,0,0]]) {
         },
         height: 600,
         width: 1000,
-        'chartArea': {'width': '80%', 'height': '80%', 
+        'chartArea': {'width': '80%', 'height': '85%', 
         'backgroundColor': {
           'fill': darkgrey,
           'opacity': 100
@@ -99,11 +97,11 @@ function drawVisualization(args=[[0,0,0,0,0]]) {
         'opacity': 100
       },
       seriesType: 'bars',
-      series: {4: {type: 'line'}},
-      colors:['#f8961e','#f9c74f','#90be6d','#43aa8b', 'red']
+      series: {4: {type: 'line'}, 5: {type: 'line'}},
+      colors:['#f8961e','#f9c74f','#90be6d','#43aa8b', 'red', 'blue']
       };
       var chart = new google.visualization.ColumnChart(
-        document.getElementById('chart_div'));
+      document.getElementById('chart_div'));
       chart.draw(data, options);
 }
 
@@ -181,6 +179,41 @@ if (year <= year2) {
 
 
 drawVisualization(finalArray);
+let el = document.getElementById('analys');
+if (finalArray.length < 2) {
+  el.innerHTML = `<h3>Аналіз:</h3>
+  <span> Недостатньо даних для аналіза (потрібно вибрати більше 1 року)</span>`;
+} else {
+let wS40, ws40_val = 100, fS40, fS40_val=0, wS, wS_val=0, fS, fS_val=0;
+for (let i = 0; i < finalArray.length; i++) {
+  if ((finalArray[i][3]/2.5+finalArray[i][4]/1.5) < ws40_val) {
+    ws40_val = (finalArray[i][3]/2.5+finalArray[i][4]/1.5);
+    wS40 = finalArray[i][0];
+  }
+  if ((finalArray[i][3]/2.5+finalArray[i][4]/1.5) > fS40_val) {
+    fS40_val = (finalArray[i][3]/2.5+finalArray[i][4]/1.5);
+    fS40 = finalArray[i][0];
+  }
+  if ((finalArray[i][1]+finalArray[i][2]) > wS_val) {
+    wS_val = (finalArray[i][1]+finalArray[i][2]);
+    wS = finalArray[i][0];
+  }
+  if ((finalArray[i][3]+finalArray[i][4]) > fS_val) {
+    fS_val = (finalArray[i][3]+finalArray[i][4]);
+    fS = finalArray[i][0];
+  }
+}
+
+el.innerHTML = `
+<h3>Аналіз:</h3>
+<span>Рік з найгіршим середнім VHI>40: <b><span>${wS40}</span></b></span><br>
+<span>Рік з найкращим середнім VHI>40: <b><span>${fS40}</span></b></span><br>
+<br>
+<span>Рік з найгіршим VHI: <b><span>${wS}</b>, % площі з VHI<40: <b>${wS_val.toFixed(1)}%</b></span></span><br>
+<span>Рік з найкращим VHI: <b><span>${fS}</b>, % площі з VHI>40: <b>${fS_val.toFixed(1)}%</b></span></span><br>
+`;
+}
+
 
 } else alert('Неправильно введений діапазон років!');
 }
