@@ -4,107 +4,165 @@ let secondColor = textColor;
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawVisualization);
-// function drawPie(args=[1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
-
-//   var data = new google.visualization.DataTable();
-
-//   var ind1 = 0;
-//   for (let i = 0; i < 4; i++) {
-//     ind1 += args[i];
-//   }
-//   var ind2 = 0;
-//   for (let i = 4; i < 8; i++) {
-//     ind2 += args[i];
-//   }
-//   var ind3 = 0;
-//   for (let i = 8; i < 13; i++) {
-//     ind3 += args[i];
-//   }
-//   var ind4 = 0;
-//   for (let i = 13; i < args.length; i++) {
-//     ind4 += args[i];
-//   }
-
-//   var data = google.visualization.arrayToDataTable([
-//     ['VHI', '%'],
-//     ['Велика засуха', ind1],
-//     ['Середня засуха', ind2],
-//     ['Нормальний', ind3],
-//     ['Хороший', ind4]]);
-
-//   // Set options for Sarah's pie chart.
-//   var options = {
-//   'chartArea': {'width': '90%', 'height': '90%', 'backgroundColor': {
-//     'fill': darkgrey,
-//     'opacity': 100
-//   }},
-//   legend: 'none', title: '', colors: ['#f8961e','#f9c74f','#90be6d','#43aa8b', ],
-//   'backgroundColor': {
-//     'fill': darkgrey,
-//     'opacity': 100
-//   },
-//   animation: {
-//     duration: 300,
-//     easing: 'ease',
-//     startup: true
-// }
-// };
-
-//   // Instantiate and draw the chart for Sarah's pizza.
-//   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-//   chart.draw(data, options);
-// }
-
-//* Отримуємо на вхід масив значень за тиждень
-function drawVisualization(args=[[0,0,0,0,0]]) {
-      console.log(args);
-      let elem = [];
-      let table = [];
-      table.push(['Рік', '<20', '20-40', '40-65', '>65', 'vhi %inc']); 
-      for (let i = 0; i < args.length; i++){
-        elem = [args[i][0], args[i][1], args[i][2], args[i][3], args[i][4], (args[i][3]/2.5+args[i][4]/1.5)];
-        table.push(elem);
-      }
-
-      var data = google.visualization.arrayToDataTable(table);
-
-      var options = {
-        title: '',
-        hAxis: {
-          title: 'Роки',
-          textStyle:{color: secondColor}
-        },
-        vAxis: {
-          title: '% від загальної площі області',
-          textStyle:{color: secondColor}
-        },
-        height: 600,
-        width: 1000,
-        'chartArea': {'width': '80%', 'height': '85%', 
+google.charts.setOnLoadCallback(drawLine);
+function drawVisualization(args=[0], tick_array, startyear = 2000, finalyear = 2001, region = "Noviy Booh") {
+  let table = [];
+  var data = new google.visualization.DataTable();
+  data.addColumn('number', 'x');
+  data.addColumn('number', 'y');
+  data.addColumn({type: 'string', role: 'tooltip'});
+  for (var i = 0; i < args.length; i++) {
+    data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`]);
+  }
+  let title = `${region} обл., ${startyear} - ${finalyear} р.`;
+  var options = {
+    title: title,
+    height: 600,
+    width: 1200,
+    'chartArea': {'width': '80%', 'height': '85%', 
         'backgroundColor': {
           'fill': darkgrey,
           'opacity': 100
         }},
-        allowCollapse: true,
-        legend: 'none',
-        animation: {
-          duration: 300,
-          easing: 'ease',
-          startup: true
-      },
-      'backgroundColor': {
-        'fill': darkgrey,
-        'opacity': 100
-      },
-      seriesType: 'bars',
-      series: {4: {type: 'line'}, 5: {type: 'line'}},
-      colors:['#f8961e','#f9c74f','#90be6d','#43aa8b', 'red', 'blue']
-      };
-      var chart = new google.visualization.ColumnChart(
-      document.getElementById('chart_div'));
-      chart.draw(data, options);
+        isStacked: true,
+        hAxis: {
+        ticks: tick_array
+        },
+        vAxis: {
+            minValue: 0,
+            maxValue: 100,
+        },      
+          seriesType: 'bars',
+          series: {54: {type: 'bar'}},
+  bar: {groupWidth: '100%'},
+  isStacked:true,
+  allowCollapse: true,
+  legend: 'none',
+  animation:{
+    duration: 1000,
+    easing: 'linear',
+    startup: false
+  },
+  curveType: 'function',
+  explorer: {
+    axis: 'horizontal',
+    keepInBounds: true,
+    maxZoomIn: 4.0
 }
 
+}
+  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+
+}
+
+
+//TODO drawLine
+function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear = 2001, region = "Noviy Booh") {
+  console.log(tick_array);
+  var data = new google.visualization.DataTable();
+  //table = args;
+  data.addColumn('number', 'x');
+  data.addColumn('number', 'Середнє VHI');
+  data.addColumn({type: 'string', role: 'tooltip'});
+  data.addColumn('number', 'Катастрофічна засуха');
+  data.addColumn('number', 'Засуха');
+  data.addColumn('number', 'Нормально');
+  data.addColumn('number', 'Шикарно');
+  
+  let max = 0, max_i = 0, min = 100, min_i = 0;
+  for (var i = 0; i < args.length; i++) {
+      if (args[i] > max) {
+        max = args[i];
+        max_i = i;
+      }
+      if (args[i] < min) {
+        min = args[i];
+        min_i = i;
+      }
+      //`${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік`
+      data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`, 15, 20, 25, 40]);
+  }
+  console.log(tick_array);
+  let title = `${region} обл., ${startyear} - ${finalyear} р.`;
+  var options = {
+    title: title,
+    height: 600,
+    width: 1200,
+    legend: {
+      position: 'none',
+      maxLines: 10
+    },
+    'chartArea': {'width': '80%', 'height': '85%', 
+        'backgroundColor': {
+          'fill': darkgrey,
+          'opacity': 100
+        }},
+        isStacked: true,
+        hAxis: {
+        ticks: tick_array
+        },
+        vAxis: {
+            minValue: 0,
+            maxValue: 100,
+        },
+        series: {
+            0: {
+                type: 'line'
+            },
+            1: {
+                lineWidth: 0,
+                type: 'area',
+                visibleInLegend: true,
+                enableInteractivity: false
+            },
+            2: {
+                lineWidth: 0,
+                type: 'area',
+                visibleInLegend: false,
+                enableInteractivity: false
+            },
+            3: {
+                lineWidth: 0,
+                type: 'area',
+                visibleInLegend: false,
+                enableInteractivity: false
+            },
+            4: {
+                lineWidth: 0,
+                type: 'area',
+                visibleInLegend: false,
+                enableInteractivity: false,
+                color: 'lime'
+            }
+  },
+  animation:{
+    duration: 1000,
+    easing: 'linear',
+    startup: false
+  },
+  trendlines: {
+    0: {type: 'exponential', color: 'purple', opacity: .4, enableInteractivity: false}
+  },
+  crosshair: {
+    color: 'black',
+    opacity: '.0',
+    trigger: 'selection'
+  },
+  curveType: 'function',
+  explorer: {
+    axis: 'horizontal',
+    keepInBounds: true,
+    maxZoomIn: 4.0
+}
+
+}
+  var chart = new google.visualization.LineChart(document.getElementById('line_div'));
+  chart.draw(data, options);
+  if (extra == true) {
+    chart.setSelection([{row: max_i, column: 1}, {row: min_i, column: 1}]);
+  }
+}
 
 // json
 document.getElementById('createGraph').onclick = function() {
@@ -112,7 +170,46 @@ document.getElementById('createGraph').onclick = function() {
   let year = +(document.getElementById('yearSelect').value);
   let year2 = +(document.getElementById('year2Select').value);
   let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${region}.json`;
+  let url_mean = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/${region}.json`;
   reqURL(url, year, year2);
+  reqURL_mean(url_mean, year, year2);
+}
+
+function reqURL_mean(url, year, year2) {
+  let requestURL = url;
+
+  let request = new XMLHttpRequest();
+  request.open('GET', requestURL);
+  request.responseType = 'json';
+  request.send();
+  request.onload = function() {
+  data = request.response;
+  handleJson(data, year, year2);
+}
+
+  function handleJson(js, year, year2) {
+    console.log(year, year2);
+    let arr = [];
+    let tick_array = [];
+    for (let i = year; i <= year2; i++) {
+      for (let j = 0; j < 52; j++) {
+        //tick_array.push({v: `${j*4}`, f: `${i}`});
+        let val = Math.round(js[`${i}`][j][j+1][4] * 100) / 100;
+        if (js[`${i}`][j][j+1][4] == -1.0) {
+          arr.push(50);
+        } else {
+          arr.push(val);
+        }
+      }
+    }
+    for (let i = 0; i < year2 - year; i++) {
+      tick_array.push({v: `${52+52*i}`, f: `${year + i + 1}`});
+    }
+    let selectedIndex = document.getElementById('regionSelect').selectedIndex;
+    let selectedText = document.getElementById('regionSelect').options[selectedIndex].text; 
+    drawLine(arr, tick_array, true, year, year2, selectedText);
+    drawVisualization(arr, tick_array, year, year2, selectedText);
+  }
 }
 
 function reqURL(url, year, year2) {
@@ -137,7 +234,7 @@ function handleJson(js, year, year2) {
 if (year <= year2) {
   for (let iter = year; iter < year2+1; iter++) {
 
-  console.log(js);
+  //console.log(js);
 
   const WEEK_NUMBER = 52;
   let arrYear = [];
@@ -148,11 +245,11 @@ if (year <= year2) {
       avg+=+(js[`${iter}`][j][`${j+1}`][i]); //сума i стовпця
     }
     avg = Math.ceil((avg/WEEK_NUMBER)*100)/100; // до сотих
-    console.log(avg);
+    //console.log(avg);
     arrYear.push(avg);
   }
 
-  console.log(arrYear);
+  //console.log(arrYear);
 
   //! 1-4, 5-8, 9-13, rest
   let awfulVHI = Math.ceil(arrYear.slice(0, 3).reduce(function(acc, val) {
@@ -168,12 +265,12 @@ if (year <= year2) {
     return acc + val;
   })*100)/100;
 
-  console.log(badVHI);
+  //console.log(badVHI);
 
   let rawArray = [`${iter}`,awfulVHI, badVHI, goodVHI, exVHI]; 
   finalArray.push(rawArray);
 
-  console.log(finalArray);
+  //(finalArray);
 }
 
 

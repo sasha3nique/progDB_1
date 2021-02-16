@@ -52,18 +52,23 @@ button {
 }
 
 #main {
-    width: 100wh;
+    width: 100vw;
     display: flex;
 }
 
-#chart {
-    width: 70%;
-    max-width: 70%;
+.chart {
+    width: 100%;
+    max-width: 100%;
     padding: 1;
 }
+#chart_box {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
 #info {
-    min-width: 30%;
-    width: 30%;
+    width: 0;
+    visibility: hidden;
     padding-top: 40px;
 }
 rect {
