@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./src/favicon-32x32.png" type="image/png">
     <title> Проект №1</title> <!--Load the AJAX API-->
@@ -134,17 +135,41 @@
         <option value="2019">2019</option>
         <option value="2020" selected>2020</option>
       </select>      
-      <button id="createGraph"> Створити графік</button>
+      <button id="createGraph" class="btn btn-primary" type="button"> Створити графік</button>
     </div>
     </div>
     <div id="main">
       <div class="chart_box">
-        <div class="chart">
+        
+        <!-- <div class="chart">
           <div id="chart_div"></div>
-        </div>
-        <div class="chart">
+        </div> -->
+        
           <div id="line_div"></div>
-        </div>
+          <div class="chart_menu">
+            <h4>Налаштування графіка</h4>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="extremum">
+              <label class="form-check-label" for="extremum">
+                Показувати точки екстремуму
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="diapazon">
+              <label class="form-check-label" for="diapazon">
+                Показувати діапазони VHI
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="trends">
+              <label class="form-check-label" for="trends">
+                Показувати тренд-лінію
+              </label>
+            </div>
+            <button type="button" class="btn btn-primary" id="createGraphOptions"> Зберегти і побудувати</button>
+            <button type="button" class="btn btn-primary" id="analysData"> Вивести аналіз</button>
+
+          </div>
       </div>
       <div id="info">
         <h3>Висновки:</h3>
@@ -176,7 +201,7 @@
       </div>
     </div>
     </div>
-    <button id="darkModeButton"> <img src="./src/moon.png" alt=""></button>
+    <!-- <button id="darkModeButton"> <img src="./src/moon.png" alt=""></button> -->
     <script src="./app.js">
     </script>
 </body>

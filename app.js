@@ -3,63 +3,62 @@ let darkgrey = mainColor;
 let secondColor = textColor;
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawVisualization);
+// google.charts.setOnLoadCallback(drawVisualization);
 google.charts.setOnLoadCallback(drawLine);
-function drawVisualization(args=[0], tick_array, startyear = 2000, finalyear = 2001, region = "Noviy Booh") {
-  let table = [];
-  var data = new google.visualization.DataTable();
-  data.addColumn('number', 'x');
-  data.addColumn('number', 'y');
-  data.addColumn({type: 'string', role: 'tooltip'});
-  for (var i = 0; i < args.length; i++) {
-    data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`]);
-  }
-  let title = `${region} обл., ${startyear} - ${finalyear} р.`;
-  var options = {
-    title: title,
-    height: 600,
-    width: 1200,
-    'chartArea': {'width': '80%', 'height': '85%', 
-        'backgroundColor': {
-          'fill': darkgrey,
-          'opacity': 100
-        }},
-        isStacked: true,
-        hAxis: {
-        ticks: tick_array
-        },
-        vAxis: {
-            minValue: 0,
-            maxValue: 100,
-        },      
-          seriesType: 'bars',
-          series: {54: {type: 'bar'}},
-  bar: {groupWidth: '100%'},
-  isStacked:true,
-  allowCollapse: true,
-  legend: 'none',
-  animation:{
-    duration: 1000,
-    easing: 'linear',
-    startup: false
-  },
-  curveType: 'function',
-  explorer: {
-    axis: 'horizontal',
-    keepInBounds: true,
-    maxZoomIn: 4.0
-}
+// function drawVisualization(args=[0], tick_array, startyear = 2000, finalyear = 2001, region = "Noviy Booh") {
+//   let table = [];
+//   var data = new google.visualization.DataTable();
+//   data.addColumn('number', 'x');
+//   data.addColumn('number', 'y');
+//   data.addColumn({type: 'string', role: 'tooltip'});
+//   for (var i = 0; i < args.length; i++) {
+//     data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`]);
+//   }
+//   let title = `${region} обл., ${startyear} - ${finalyear} р.`;
+//   var options = {
+//     title: title,
+//     height: 600,
+//     width: 1100,
+//     'chartArea': {'width': '90%', 'height': '85%', 
+//         'backgroundColor': {
+//           'fill': darkgrey,
+//           'opacity': 100
+//         }},
+//         isStacked: true,
+//         hAxis: {
+//         ticks: tick_array
+//         },
+//         vAxis: {
+//             minValue: 0,
+//             maxValue: 100,
+//         },      
+//           seriesType: 'bars',
+//           series: {1: {type: 'bar'}},
+//   bar: {groupWidth: '100%'},
+//   isStacked:false,
+//   allowCollapse: false,
+//   legend: 'none',
+//   animation:{
+//     duration: 1000,
+//     easing: 'linear',
+//     startup: false
+//   },
+//   curveType: 'function',
+//   explorer: {
+//     axis: 'horizontal',
+//     keepInBounds: true,
+//     maxZoomIn: 12.0
+// }
 
-}
-  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
+// }
+//   var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+//   chart.draw(data, options);
 
-}
+// }
 
 
 //TODO drawLine
-function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear = 2001, region = "Noviy Booh") {
-  console.log(tick_array);
+function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear = 2001, region = "Noviy Booh", exp=false, diapazon=true, trends=true, shadows=false) {
   var data = new google.visualization.DataTable();
   //table = args;
   data.addColumn('number', 'x');
@@ -69,7 +68,7 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
   data.addColumn('number', 'Засуха');
   data.addColumn('number', 'Нормально');
   data.addColumn('number', 'Шикарно');
-  
+  let prevData = [];
   let max = 0, max_i = 0, min = 100, min_i = 0;
   for (var i = 0; i < args.length; i++) {
       if (args[i] > max) {
@@ -80,11 +79,23 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
         min = args[i];
         min_i = i;
       }
-      //`${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік`
-      data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`, 15, 20, 25, 40]);
+      
+      function renderGraph(dp, shd) {
+        if (dp) {
+          data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`, 15, 20, 25, 40]);
+
+        } else {
+          data.addRow([i, args[i], `${((i%52) + 1).toString()} тиждень, ${startyear -1 +Math.ceil(i/52)} рік\nСереднє VHI: ${args[i]}`, 0, 0, 0, 0]);
+        }
+      }
+
+      renderGraph(diapazon, shadows)
   }
-  console.log(tick_array);
   let title = `${region} обл., ${startyear} - ${finalyear} р.`;
+  let trendsOption = {type: 'exponential', color: 'purple', opacity: .0, enableInteractivity: false}
+  if (trends) {
+    trendsOption = {type: 'exponential', color: 'purple', opacity: .4, enableInteractivity: false}
+  }
   var options = {
     title: title,
     height: 600,
@@ -93,7 +104,7 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
       position: 'none',
       maxLines: 10
     },
-    'chartArea': {'width': '80%', 'height': '85%', 
+    'chartArea': {'width': '90%', 'height': '85%', 
         'backgroundColor': {
           'fill': darkgrey,
           'opacity': 100
@@ -141,8 +152,8 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
     easing: 'linear',
     startup: false
   },
-  trendlines: {
-    0: {type: 'exponential', color: 'purple', opacity: .4, enableInteractivity: false}
+  trendlines: {  
+    0: trendsOption
   },
   crosshair: {
     color: 'black',
@@ -153,13 +164,13 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
   explorer: {
     axis: 'horizontal',
     keepInBounds: true,
-    maxZoomIn: 4.0
+    maxZoomIn: 12.0
 }
 
 }
   var chart = new google.visualization.LineChart(document.getElementById('line_div'));
   chart.draw(data, options);
-  if (extra == true) {
+  if (exp) {
     chart.setSelection([{row: max_i, column: 1}, {row: min_i, column: 1}]);
   }
 }
@@ -171,7 +182,18 @@ document.getElementById('createGraph').onclick = function() {
   let year2 = +(document.getElementById('year2Select').value);
   let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${region}.json`;
   let url_mean = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/${region}.json`;
-  reqURL(url, year, year2);
+  
+  //reqURL(url, year, year2);
+  reqURL_mean(url_mean, year, year2);
+}
+document.getElementById('createGraphOptions').onclick = function() {
+  let region = document.getElementById('regionSelect').value;
+  let year = +(document.getElementById('yearSelect').value);
+  let year2 = +(document.getElementById('year2Select').value);
+  let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${region}.json`;
+  let url_mean = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/${region}.json`;
+  
+  //reqURL(url, year, year2);
   reqURL_mean(url_mean, year, year2);
 }
 
@@ -206,9 +228,14 @@ function reqURL_mean(url, year, year2) {
       tick_array.push({v: `${52+52*i}`, f: `${year + i + 1}`});
     }
     let selectedIndex = document.getElementById('regionSelect').selectedIndex;
-    let selectedText = document.getElementById('regionSelect').options[selectedIndex].text; 
-    drawLine(arr, tick_array, true, year, year2, selectedText);
-    drawVisualization(arr, tick_array, year, year2, selectedText);
+    let reg = document.getElementById('regionSelect').options[selectedIndex].text; 
+
+    let exp = document.getElementById('extremum').checked;
+    let diapazon = document.getElementById('diapazon').checked;
+    let trends = document.getElementById('trends').checked;
+
+    drawLine(arr, tick_array, true, year, year2, reg, exp, diapazon, trends);
+    //drawVisualization(arr, tick_array, year, year2, selectedText);
   }
 }
 
@@ -325,27 +352,27 @@ function switchToDarkMode() {
   document.getElementById('container').style.backgroundColor = '#192734';
   document.getElementById('container').style.color = '#FFF';
   render('#192734', '#FFF');
-  drkBtn = document.getElementById('darkModeButton');
-  drkBtn.onclick = function() {
-    switchToLightMode();
-}
-drkBtn.style.backgroundColor = '#f9c74f';
+//   drkBtn = document.getElementById('darkModeButton');
+//   drkBtn.onclick = function() {
+//     switchToLightMode();
+// }
+// drkBtn.style.backgroundColor = '#f9c74f';
 }
 
 function switchToLightMode() {
   document.getElementById('container').style.backgroundColor = '#FFF';
   document.getElementById('container').style.color = '#192734';
   render('#FFF', '#192734');
-  drkBtn = document.getElementById('darkModeButton');
-  drkBtn.onclick = function() {
-    switchToDarkMode();
-}
+//   drkBtn = document.getElementById('darkModeButton');
+//   drkBtn.onclick = function() {
+//     switchToDarkMode();
+// }
 drkBtn.style.backgroundColor = '#FFF';
 }
 
-drkBtn = document.getElementById('darkModeButton');
-drkBtn.onclick = function() {
-  switchToLightMode();
-}
+// drkBtn = document.getElementById('darkModeButton');
+// drkBtn.onclick = function() {
+//   switchToLightMode();
+// }
 
 switchToLightMode();

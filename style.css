@@ -20,6 +20,9 @@ body {
 #container {
   background-color: #192734;
   height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 select {
@@ -36,7 +39,7 @@ button {
 }
 
 #header {
-  background-color: rgba(144, 190, 109, 0.25);
+  background-color: rgba(147, 217, 245, 0.25);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -51,19 +54,6 @@ button {
   margin: 15px;
 }
 
-#createGraph {
-  background-color: #f9c74f;
-  color: black;
-  border: none;
-  -webkit-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-}
-
-#createGraph:hover {
-  background-color: #f8961e;
-  color: black;
-}
-
 #main {
   width: 100vw;
   display: -webkit-box;
@@ -71,20 +61,15 @@ button {
   display: flex;
 }
 
-.chart {
-  width: 100%;
-  max-width: 100%;
-  padding: 1;
+.chart_menu {
+  padding: 25px;
 }
 
-#chart_box {
+.chart_box {
+  max-width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -ms-flex-line-pack: center;
       align-content: center;
 }
@@ -101,6 +86,10 @@ rect {
 
 h3 {
   padding-bottom: 10px;
+}
+
+.btn {
+  margin: 10px;
 }
 
 .legendBox {
