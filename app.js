@@ -152,7 +152,7 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
                 lineWidth: 0,
                 type: 'area',
                 visibleInLegend: false,
-                enableInteractivity: false
+                enableInteractivity: false,
             },
             4: {
                 lineWidth: 0,
