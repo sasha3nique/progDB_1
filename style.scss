@@ -11,13 +11,13 @@ body {
     display: flex;
     flex-direction: column;
     color: #FFF;
+    width: 95vw;
+    max-width: 95vw;
 }
 #container {
     background-color: $darkgrey;
-    height: 100vh;
-    width: 100vw;
-    max-width: 100vw;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 select {
@@ -43,13 +43,12 @@ button {
     }
 }
 
-#createGraph {
 
-}
 
 #main {
-    width: 100vw;
+    width: 100%;
     display: flex;
+    flex-direction: column;
 }
 
 // .chart {
@@ -124,4 +123,17 @@ h3 {
         transition: transform 0.25s ease;
     }
     background: #f9c74f;
+}
+
+#chart-box-map {
+    width: 100%;
+    height: 600px;
+}
+#createMap {
+    position: relative;
+    right: 10px;
+}
+#chart-box-map path {
+stroke-width:1; /* control the countries borders width */
+stroke:black; /* choose a color for the border */
 }
