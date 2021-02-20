@@ -4,21 +4,6 @@ let secondColor = textColor;
 
 let json_all_years = [];
 let promise = new Promise(function(resolve, reject) {
-  // for (let i = 0; i < 1; i++) {
-  //   let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/Cherkasy(1).json`;
-  //   let request = new XMLHttpRequest();
-  //   request.open('GET', url);
-  //   request.responseType = 'json';
-  //   request.send();
-  //   request.onload = function() {
-  //   data = request.response;
-  //   json_all_years.push(data);
-  //   json_all_years.push(1);
-  //   }
-  //   setTimeout(function(){}, 100);
-  //   json_all_years.push('1');
-  // }
-  // //console.log(json_all_years);
   resolve(json_all_years);
   console.log('1');
 });
@@ -82,14 +67,15 @@ function drawRegionsMap(arr=[]) {
         var options = {
           region: 'UA',
           resolution: 'provinces',
-          colors: ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#548C2F'],
+          colors: ['#ffadad', '#ffd6a5', '#fdffb6','#caffbf', '#caffbf', '#caffbf', '#548C2F'],
           height: 600,
           width: 1200,
           'chartArea': {'width': '100%', 'height': '85%'},
-          colorAxis: {minValue: 0, position: 'top'},
-          backgroundColor: {'stroke': 'red', 'strokeWidth': 0},
+          colorAxis: {minValue: 0, position: 'top', maxValue: 100},
+          backgroundColor: {'stroke': 'black', 'strokeWidth': 2},
           displayMode: 'regions',
-          datalessRegionColor: 'white'
+          datalessRegionColor: 'white',
+  
       };
 
         var chart = new google.visualization.GeoChart(document.getElementById('chart-box-map'));
@@ -141,6 +127,7 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
   }
   var options = {
     title: title,
+    backgroundColor: {'stroke': 'black', 'strokeWidth': 2},
     height: 600,
     width: 1200,
     legend: {
@@ -244,25 +231,28 @@ document.getElementById('createMapSlide').onclick = function() {
   let year = +(document.getElementById('yearMapSelect').value);
   let url_map = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/all.json`;
   let time = +(document.getElementById('interval').value)*1000;
-  for (let i = 1; i < 53; i++) {
-    //reqUrl_mean_map(url_map, year, i);
+  let week1 = +(document.getElementById('weekSelectMap1').value);
+  let week2 = +(document.getElementById('weekSelectMap2').value);
+  let iter = 0;
+  for (let i = week1; i <= week2; i++) {
     setTimeout(function() {
       reqUrl_mean_map(url_map, year, i);
-      document.getElementById('slide-text').innerHTML = 'Тиждень: ' + `${i}`;
-    }, time*i);
+      document.getElementById('slide-text').innerHTML = `Тиждень: ${i}, рік: ${year}`;
+    }, time*iter);
+    iter+=1;
   }
 }
 
-document.getElementById('createGraphOptions').onclick = function() {
-  let region = document.getElementById('regionSelect').value;
-  let year = +(document.getElementById('yearSelect').value);
-  let year2 = +(document.getElementById('year2Select').value);
-  let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${region}.json`;
-  let url_mean = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/${region}.json`;
+// document.getElementById('createGraphOptions').onclick = function() {
+//   let region = document.getElementById('regionSelect').value;
+//   let year = +(document.getElementById('yearSelect').value);
+//   let year2 = +(document.getElementById('year2Select').value);
+//   let url = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${region}.json`;
+//   let url_mean = `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/DataVHI_Mean/${region}.json`;
   
-  //reqURL(url, year, year2);
-  reqURL_mean(url_mean, year, year2);
-}
+//   //reqURL(url, year, year2);
+//   reqURL_mean(url_mean, year, year2);
+// }
 //!map
 function reqUrl_mean_map(url, year, week) {
   let requestURL = url;

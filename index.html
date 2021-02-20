@@ -22,120 +22,6 @@
   <div id="container">
     <div>
       <div id="header">
-      <select name="selectRegion" id="regionSelect"> <!--Supplement an id here instead of using 'name'-->
-        <option value="Cherkasy(1)" selected>Черкаська</option>
-        <option value="Chernihiv(2)">Чернігівська</option>
-        <option value="Chernivtsi(3)">Чернівецька</option>
-        <option value="Crimea(4)">АР Крим</option>
-        <option value="Dnipropetrovs'k(5)">Дніпропетровська</option>
-        <option value="Donets'k(6)">Донецька</option>
-        <option value="Ivano-Frankivs'k(7)">Івано-Франківська</option>
-        <option value="Kharkiv(8)">Харківська</option>
-        <option value="Kherson(9)">Херсонська</option>
-        <option value="Khmel'nyts'kyy(10)">Хмельницька</option>
-        <option value="Kiev(11)">Київ</option>
-        <option value="Kiev(12)">м. Київ</option>
-        <option value="Kirovohrad(13)">Кіровоградська</option>
-        <option value="Luhans'k(14)">Луганська</option>
-        <option value="L'viv(15)">Львівська</option>
-        <option value="Mykolayiv(16)">Миколаївська</option>
-        <option value="Odessa(17)">Одеса</option>
-        <option value="Poltava(18)">Полтава</option>
-        <option value="Rivne(19)">Рівне</option>
-        <option value="Sevastopol'(20)">Севастополь</option>
-        <option value="Sumy(21)">Суми</option>
-        <option value="Ternopil'(22)">Тернопільська</option>
-        <option value="Transcarpathia(23)">Закарпатська</option>
-        <option value="Vinnytsya(24)">Вінницька</option>
-        <option value="Volyn(25)">Волинська</option>
-        <option value="Zaporizhzhya(26)">Запорізька</option>
-      </select>      
-      <select name="selectYear" id="yearSelect">
-        <option value="1981">1981</option>
-        <option value="1982">1982</option>
-        <option value="1983">1983</option>
-        <option value="1984">1984</option>
-        <option value="1985">1985</option>
-        <option value="1986">1986</option>
-        <option value="1987">1987</option>
-        <option value="1988">1988</option>
-        <option value="1989">1989</option>
-        <option value="1990">1990</option>
-        <option value="1991">1991</option>
-        <option value="1992">1992</option>
-        <option value="1993">1993</option>
-        <option value="1994">1994</option>
-        <option value="1995">1995</option>
-        <option value="1996">1996</option>
-        <option value="1997">1997</option>
-        <option value="1998">1998</option>
-        <option value="1999">1999</option>
-        <option value="2000">2000</option>
-        <option value="2001">2001</option>
-        <option value="2002">2002</option>
-        <option value="2003">2003</option>
-        <option value="2004">2004</option>
-        <option value="2005">2005</option>
-        <option value="2006">2006</option>
-        <option value="2007">2007</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-        <option value="2014">2014</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020" selected>2020</option>
-      </select>
-
-      <select name="selectYear" id="year2Select">
-        <option value="1981">1981</option>
-        <option value="1982">1982</option>
-        <option value="1983">1983</option>
-        <option value="1984">1984</option>
-        <option value="1985">1985</option>
-        <option value="1986">1986</option>
-        <option value="1987">1987</option>
-        <option value="1988">1988</option>
-        <option value="1989">1989</option>
-        <option value="1990">1990</option>
-        <option value="1991">1991</option>
-        <option value="1992">1992</option>
-        <option value="1993">1993</option>
-        <option value="1994">1994</option>
-        <option value="1995">1995</option>
-        <option value="1996">1996</option>
-        <option value="1997">1997</option>
-        <option value="1998">1998</option>
-        <option value="1999">1999</option>
-        <option value="2000">2000</option>
-        <option value="2001">2001</option>
-        <option value="2002">2002</option>
-        <option value="2003">2003</option>
-        <option value="2004">2004</option>
-        <option value="2005">2005</option>
-        <option value="2006">2006</option>
-        <option value="2007">2007</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-        <option value="2014">2014</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020" selected>2020</option>
-      </select>      
-      <button id="createGraph" class="btn btn-primary" type="button"> Створити графік</button>
     </div>
     </div>
     <div id="main">
@@ -147,7 +33,125 @@
         
           <div id="line_div"></div>
           <div class="chart_menu">
-            <h4>Налаштування графіка</h4>
+            <h4><b>Налаштування графіка</b></h4>
+            <label for="selectRegion"> Область:</label>
+            <select name="selectRegion" id="regionSelect" class="form-select"> <!--Supplement an id here instead of using 'name'-->
+              <option value="Cherkasy(1)" selected>Черкаська</option>
+              <option value="Chernihiv(2)">Чернігівська</option>
+              <option value="Chernivtsi(3)">Чернівецька</option>
+              <option value="Crimea(4)">АР Крим</option>
+              <option value="Dnipropetrovs'k(5)">Дніпропетровська</option>
+              <option value="Donets'k(6)">Донецька</option>
+              <option value="Ivano-Frankivs'k(7)">Івано-Франківська</option>
+              <option value="Kharkiv(8)">Харківська</option>
+              <option value="Kherson(9)">Херсонська</option>
+              <option value="Khmel'nyts'kyy(10)">Хмельницька</option>
+              <option value="Kiev(11)">Київ</option>
+              <option value="Kiev(12)">м. Київ</option>
+              <option value="Kirovohrad(13)">Кіровоградська</option>
+              <option value="Luhans'k(14)">Луганська</option>
+              <option value="L'viv(15)">Львівська</option>
+              <option value="Mykolayiv(16)">Миколаївська</option>
+              <option value="Odessa(17)">Одеса</option>
+              <option value="Poltava(18)">Полтава</option>
+              <option value="Rivne(19)">Рівне</option>
+              <option value="Sevastopol'(20)">Севастополь</option>
+              <option value="Sumy(21)">Суми</option>
+              <option value="Ternopil'(22)">Тернопільська</option>
+              <option value="Transcarpathia(23)">Закарпатська</option>
+              <option value="Vinnytsya(24)">Вінницька</option>
+              <option value="Volyn(25)">Волинська</option>
+              <option value="Zaporizhzhya(26)">Запорізька</option>
+            </select>
+            <label for="selectRegion"> Діапазон років:</label>    
+            <div class="input-group"> 
+            <select name="selectYear" id="yearSelect" class="form-select">
+              <option value="1981">1981</option>
+              <option value="1982">1982</option>
+              <option value="1983">1983</option>
+              <option value="1984">1984</option>
+              <option value="1985">1985</option>
+              <option value="1986">1986</option>
+              <option value="1987">1987</option>
+              <option value="1988">1988</option>
+              <option value="1989">1989</option>
+              <option value="1990">1990</option>
+              <option value="1991">1991</option>
+              <option value="1992">1992</option>
+              <option value="1993">1993</option>
+              <option value="1994">1994</option>
+              <option value="1995">1995</option>
+              <option value="1996">1996</option>
+              <option value="1997">1997</option>
+              <option value="1998">1998</option>
+              <option value="1999">1999</option>
+              <option value="2000">2000</option>
+              <option value="2001">2001</option>
+              <option value="2002">2002</option>
+              <option value="2003">2003</option>
+              <option value="2004">2004</option>
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020" selected>2020</option>
+            </select>
+      
+            <select name="selectYear" id="year2Select" class="form-select">
+              <option value="1981">1981</option>
+              <option value="1982">1982</option>
+              <option value="1983">1983</option>
+              <option value="1984">1984</option>
+              <option value="1985">1985</option>
+              <option value="1986">1986</option>
+              <option value="1987">1987</option>
+              <option value="1988">1988</option>
+              <option value="1989">1989</option>
+              <option value="1990">1990</option>
+              <option value="1991">1991</option>
+              <option value="1992">1992</option>
+              <option value="1993">1993</option>
+              <option value="1994">1994</option>
+              <option value="1995">1995</option>
+              <option value="1996">1996</option>
+              <option value="1997">1997</option>
+              <option value="1998">1998</option>
+              <option value="1999">1999</option>
+              <option value="2000">2000</option>
+              <option value="2001">2001</option>
+              <option value="2002">2002</option>
+              <option value="2003">2003</option>
+              <option value="2004">2004</option>
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020" selected>2020</option>
+            </select> 
+          </div>
+          <br>     
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="extremum" checked>
               <label class="form-check-label" for="extremum">
@@ -167,13 +171,15 @@
               </label>
               <!-- To edit settings, press <kbd><kbd>ctrl</kbd> + <kbd>,</kbd></kbd> -->
             </div>
-            <button type="button" class="btn btn-primary" id="createGraphOptions"> Зберегти і побудувати</button>
+            <button id="createGraph" class="btn btn-primary" type="button"> Створити графік</button>
+            <!-- <button type="button" class="btn btn-primary" id="createGraphOptions"> Зберегти і побудувати</button> -->
             <button type="button" class="btn btn-primary" id="analysData"> Вивести посушливі роки</button>
             <div id="analys-results">
               
             </div>
           </div>
       </div>
+      <hr>
       <div class="chart_box">
         <div id="chart-box-map">
         
@@ -279,12 +285,130 @@
             <option value="52">52</option>           
           </select>
           <button type="button" class="btn btn-primary" id="createMap">Побудувати мапу</button>
-          <br>
-          <br>
+
+          <hr>
+
           <h4> <b>Слайд-шоу</b> </h4>
-          <label for="">Інтервал між кадрами (в сек.):</label>
-          <input class="form-control" type="text" id="interval" value="2">
+          <label for="">Інтервал між кадрами:</label>
+          <div class="input-group mb-3">
+            <input class="form-control" type="text" id="interval" value="2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon1">сек.</span>
+            </div>
+          </div>
           <h6><small><i>Рекомендований інтервал: від 1.5 секунд</i></small></h6>
+          <label for="">Діапазон неділь:</label>
+          <div class="input-group">
+            <select name="selectWeek" id="weekSelectMap1" class="form-select">
+              <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+            <option value="46">46</option>
+            <option value="47">47</option>
+            <option value="48">48</option>
+            <option value="49">49</option>
+            <option value="50">50</option>
+            <option value="51">51</option>   
+            <option value="52">52</option>      
+              </select>
+              <select name="selectWeek" id="weekSelectMap2" class="form-select">
+                <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+            <option value="46">46</option>
+            <option value="47">47</option>
+            <option value="48">48</option>
+            <option value="49">49</option>
+            <option value="50">50</option>
+            <option value="51">51</option>   
+            <option value="52" selected>52</option>      
+                </select>
+                
+          </div>
           <button type="button" class="btn btn-primary" id="createMapSlide">Створити слайд-шоу</button>
           <span id="slide-text"></span>
 
