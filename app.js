@@ -72,7 +72,7 @@ function drawRegionsMap(arr=[]) {
           width: 1200,
           'chartArea': {'width': '100%', 'height': '85%'},
           colorAxis: {minValue: 0, position: 'top', maxValue: 100},
-          backgroundColor: {'stroke': 'black', 'strokeWidth': 2},
+          backgroundColor: {'stroke': 'black', 'strokeWidth': 0},
           displayMode: 'regions',
           datalessRegionColor: 'white',
   
@@ -127,7 +127,7 @@ function drawLine(args=[0], tick_array, extra=false, startyear=2000, finalyear =
   }
   var options = {
     title: title,
-    backgroundColor: {'stroke': 'black', 'strokeWidth': 2},
+    backgroundColor: {'stroke': 'black', 'strokeWidth': 0},
     height: 600,
     width: 1200,
     legend: {
