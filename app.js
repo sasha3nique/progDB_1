@@ -294,17 +294,43 @@ function reqURL_mean(url, year, year2) {
     //console.log(year, year2);
     let arr = [];
     let tick_array = [];
+    let arr_bad_years = [];
+    let arr_worst_years = [];
+    const REQUIRED_WEEKS_FOR_WASTE = 12;
+
     for (let i = year; i <= year2; i++) {
-      for (let j = 0; j < 52; j++) {
+      b_arr = [];
+      w_arr = []; 
+      for (let j = 0; j < 52; j++) {//кожен тиждень
         //tick_array.push({v: `${j*4}`, f: `${i}`});
         let val = Math.round(js[`${i}`][j][j+1][4] * 100) / 100;
-        if (js[`${i}`][j][j+1][4] == -1.0) {
+        let vhi = js[`${i}`][j][j+1][4];
+        if (vhi == -1.0) {
           arr.push(50);
         } else {
           arr.push(val);
+          if (vhi < 15) {
+            w_arr.push(`${i}`);
+          }
+          if (vhi < 35) {
+            b_arr.push(`${i}`);
+          }
         }
       }
+      if (b_arr.length >= REQUIRED_WEEKS_FOR_WASTE) {
+        arr_bad_years.push(`${i}`);
+      }
+      if (w_arr.length >= REQUIRED_WEEKS_FOR_WASTE - 10) {
+        arr_worst_years.push(`${i}`);
+      }
     }
+
+    let output = `<i><div><p>Роки з посухою: ${arr_bad_years.join(', ')}</p></div>
+                  <div><p>Роки з екстримальною посухою: ${arr_worst_years.join(', ')}</p></div></i>`;
+    
+    document.getElementById('analys-results').innerHTML = output;
+    
+
     for (let i = 0; i < year2 - year; i++) {
       tick_array.push({v: `${52+52*i}`, f: `${year + i + 1}`});
     }
@@ -318,35 +344,56 @@ function reqURL_mean(url, year, year2) {
     drawLine(arr, tick_array, true, year, year2, reg, exp, diapazon, trends);
     //drawVisualization(arr, tick_array, year, year2, selectedText);
 
-    //analys
-    let el_anal = document.getElementById('analys-results');
+    //!analys
+    
 
     //console.log(tick_array);
-    let arr_bad_years = [];
-    let arr_worst_years = [];
+  
+    
+    // let regUrl = document.getElementById('regionSelect').value;
 
-    for (let i = year; i <= year2; i++) {
-      for (let j = 0; j < 52; j++) {
-        if (js[`${i}`][j][j+1][4] < 35.0 && js[`${i}`][j][j+1][4] > 15.0) {
-          arr_bad_years.push(i);
-          //arr_bad_years.push(js[`${i}`][j][j+1][4]);
-          continue;
-        }
-        if (js[`${i}`][j][j+1][4] < 15.0) {
-          arr_worst_years.push(i);
-          //arr_bad_years.push(js[`${i}`][j][j+1][4]);
-          continue;
-        }
-      }
-    }
-    arr_bad_years = Array.from(new Set(arr_bad_years));
-    arr_worst_years = Array.from(new Set(arr_worst_years));
+    // let request = new XMLHttpRequest();
+    // request.open('GET', `https://raw.githubusercontent.com/sasha3nique/json_nubip/master/${regUrl}.json`);
+    // request.responseType = 'json';
+    // request.send();
+    // let data = [];
+    // request.onload = function() {
+    // data = request.response;
+    // let json = data; 
+    //   for (let i = year; i <= year2; i++) { //для кожного року
+    //     let b_years = [];
+    //     let w_years = [];
+    //     for (let j = 0; j < 52; j++) { // для кожного тижня
+    //       let sum_extra = 0;
+    //       let sum = 0;
+    //       //console.log(json[`${i}`][j][j+1]); 
+    //       for (let k = 0; k < 4; k++) { // перші 4 значення
+    //         sum_extra+=+(json[`${i}`][j][j+1][k]);
+    //       }
+    //       for (let k = 0; k < 8; k++) { // перші 4 значення
+    //         sum+=+(json[`${i}`][j][j+1][k]);
+    //       }
+    //       if (sum_extra > 70) {
+    //         w_years.push(`${i}`);
+    //       }
+    //       if (sum > 40) {
+    //         b_years.push(`${i}`);
+    //       }
+    //     }
+    //     if (b_years.length > 30) {
+    //       arr_bad_years.push(`${i}`);
+    //     }
+    //     if (w_years.length > 5) {
+    //       arr_orst_years.push(`${i}`);
+    //     }
+    //   }
+    //   let output = `<i><div><p>Роки з посухою: ${arr_bad_years.join(', ')}</p></div>
+    //   <div><p>Роки з екстримальною посухою: ${arr_worst_years.join(', ')}</p></div></i>`;
+    // document.getElementById('analysData').onclick = function() {
+    // el_anal.innerHTML = output;
+    // }
+    // }
 
-    let output = `<h4>Посушливі роки:</h4><div><p>Роки з посухою: ${arr_bad_years.join(', ')}</p></div>
-                  <div><p>Роки з екстримальною посухою: ${arr_worst_years.join(', ')}</p></div>`;
-    document.getElementById('analysData').onclick = function() {
-      el_anal.innerHTML = output;
-    }
 
   }
 }
