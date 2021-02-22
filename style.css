@@ -15,7 +15,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   color: #FFF;
-  width: 95vw;
+  width: 90vw;
   max-width: 95vw;
 }
 
@@ -46,6 +46,10 @@ button {
 }
 
 #header {
+  background-color: #0d6efd;
+  width: 100%;
+  color: white;
+  font-size: 24px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

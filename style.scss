@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     color: #FFF;
-    width: 95vw;
+    width: 90vw;
     max-width: 95vw;
 }
 #container {
@@ -38,7 +38,10 @@ button {
 }
 
 #header {
-    //background-color: $blue;
+    background-color: $blue;
+    width: 100%;
+    color: white;
+    font-size: 24px;
     display: flex;
     align-content: center;
     justify-content: center;
